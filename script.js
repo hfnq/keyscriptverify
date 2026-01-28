@@ -1,99 +1,72 @@
-function getKey() {
+// Get REAL_KEY from URL hash
+function getKeyFromURL() {
   if (location.hash.startsWith("#KEY=")) {
     return location.hash.replace("#KEY=", "");
   }
   return null;
 }
 
-const phrases = [
-  "I am human",
-  "verify access",
-  "not a robot",
-  "manual verification"
-];
-
-const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-
-let left = false, right = false, middle = false, f12 = false;
-
-// STEP 0 – Delay
-setTimeout(() => {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("status").innerText = "Step 1: Type verification";
-
-  document.getElementById("challengeText").innerText =
-    `Type exactly: "${phrase}"`;
-
-  document.getElementById("stepTyping").style.display = "block";
-}, 2000);
-
-// STEP 1 – Typing
-document.getElementById("typingBtn").onclick = () => {
-  if (document.getElementById("challengeInput").value.trim() !== phrase) {
-    alert("Incorrect text");
-    return;
-  }
-
-  document.getElementById("stepTyping").style.display = "none";
-  document.getElementById("stepMouse").style.display = "block";
-  document.getElementById("status").innerText = "Step 2: Mouse actions";
-};
-
-// STEP 2 – Mouse clicks
-document.addEventListener("click", e => {
-  if (e.button === 0) {
-    left = true;
-    document.getElementById("left").innerText = "✅ Left Click";
-  }
-});
-
-document.addEventListener("contextmenu", e => {
-  right = true;
-  document.getElementById("right").innerText = "✅ Right Click";
-});
-
-document.addEventListener("mousedown", e => {
-  if (e.button === 1) {
-    middle = true;
-    document.getElementById("middle").innerText = "✅ Middle Click";
-  }
-
-  if (left && right && middle) {
-    document.getElementById("stepMouse").style.display = "none";
-    document.getElementById("stepKey").style.display = "block";
-    document.getElementById("status").innerText = "Step 3: Keyboard";
-  }
-});
-
-// STEP 3 – F12
-document.addEventListener("keydown", e => {
-  if (e.key === "F12") {
-    f12 = true;
-    unlock();
-  }
-});
-
-function unlock() {
-  if (!f12) return;
-
-  const key = getKey();
-  if (!key) {
-    document.getElementById("status").innerText =
-      "No verification key found.";
-    return;
-  }
-
-  document.getElementById("stepKey").style.display = "none";
-  document.getElementById("status").innerText = "Verification complete";
-
-  document.getElementById("keyBox").style.display = "block";
-  document.getElementById("copyBtn").style.display = "block";
-  document.getElementById("keyBox").value = key;
+// Reverse helper
+function reverse(str) {
+  return str.split("").reverse().join("");
 }
 
-document.getElementById("copyBtn").onclick = () => {
-  const box = document.getElementById("keyBox");
-  box.select();
-  navigator.clipboard.writeText(box.value);
+// Simple human challenge
+const challenges = [
+  "i am human",
+  "verify access",
+  "not a robot",
+  "human check"
+];
+
+const challenge =
+  challenges[Math.floor(Math.random() * challenges.length)];
+
+const status = document.getElementById("status");
+const loader = document.getElementById("loader");
+const humanCheck = document.getElementById("humanCheck");
+const challengeText = document.getElementById("challengeText");
+const challengeInput = document.getElementById("challengeInput");
+const verifyBtn = document.getElementById("verifyHuman");
+const keyBox = document.getElementById("keyBox");
+const copyBtn = document.getElementById("copyBtn");
+
+// Fake load delay (anti-bot)
+setTimeout(() => {
+  loader.style.display = "none";
+  status.textContent = "Human verification required";
+  challengeText.textContent = `Type exactly: "${challenge}"`;
+  humanCheck.classList.remove("hidden");
+}, 2000);
+
+// Verify human + generate FINAL KEY
+verifyBtn.onclick = () => {
+  if (challengeInput.value.trim() !== challenge) {
+    alert("Verification failed.");
+    return;
+  }
+
+  const realKey = getKeyFromURL();
+  if (!realKey) {
+    status.textContent = "No verification key found.";
+    return;
+  }
+
+  // 🔐 TRANSFORM KEY (MUST MATCH ROBLOX)
+  const finalKey = `VERIFY-${reverse(realKey)}-OK`;
+
+  humanCheck.classList.add("hidden");
+  status.textContent = "Verification complete";
+
+  keyBox.value = finalKey;
+  keyBox.classList.remove("hidden");
+  copyBtn.classList.remove("hidden");
+};
+
+// Copy
+copyBtn.onclick = () => {
+  keyBox.select();
+  keyBox.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(keyBox.value);
   alert("Key copied!");
 };
