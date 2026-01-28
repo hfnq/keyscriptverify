@@ -56,7 +56,7 @@ verifyBtn.onclick = () => {
   const finalKey = `VERIFY-${reverse(realKey)}-OK`;
 
   humanCheck.classList.add("hidden");
-  status.textContent = "Verification complete";
+  status.textContent = "Verification complete (remove the '=YEK#' part it is just for security purposes!)";
 
   keyBox.value = finalKey;
   keyBox.classList.remove("hidden");
