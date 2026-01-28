@@ -2,28 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Verification</title>
+  <title>Key Verification</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>Verification</h1>
+<div class="container">
+  <h1>Verification</h1>
 
-    <div id="loader"></div>
-    <p id="status">Loading verification...</p>
-
-    <div id="humanCheck" class="hidden">
-      <p id="challengeText"></p>
-      <input id="challengeInput" placeholder="Type the text above">
-      <button id="verifyHuman">Verify</button>
-    </div>
-
-    <textarea id="keyBox" class="hidden" readonly></textarea>
-    <button id="copyBtn" class="hidden">Copy Key</button>
+  <div class="step">
+    <label>
+      <input type="checkbox" id="humanCheck">
+      I am not a robot
+    </label>
   </div>
 
-  <!-- IMPORTANT: defer -->
-  <script src="script.js" defer></script>
+  <div class="step">
+    <p id="mathQuestion"></p>
+    <input type="text" id="mathAnswer" placeholder="Your answer">
+  </div>
+
+  <button id="verifyBtn" disabled>Verify</button>
+
+  <div id="result" class="hidden">
+    <p>Your Key:</p>
+    <input type="text" id="keyBox" readonly>
+    <button id="copyBtn">Copy Key</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
