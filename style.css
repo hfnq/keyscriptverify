@@ -17,12 +17,12 @@ body {
   max-width: 420px;
   background: #151515;
   padding: 25px;
-  border-radius: 12px;
+  border-radius: 14px;
   text-align: center;
 }
 
 h1 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .loader {
@@ -41,35 +41,51 @@ h1 {
 
 #status {
   margin-bottom: 15px;
+  color: #aaa;
+}
+
+#challengeText {
+  color: #ffa726;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+#challengeInput {
+  width: 100%;
+  padding: 10px;
+  background: #0d0d0d;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  background: #4caf50;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #43a047;
 }
 
 #keyBox {
   width: 100%;
   min-height: 90px;
+  margin-top: 10px;
   padding: 12px;
-  font-size: 15px;
   background: #0d0d0d;
   color: #4caf50;
   border: 1px solid #333;
   border-radius: 6px;
-  resize: none;
 
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-}
-
-#copyBtn {
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px;
-  background: #4caf50;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-#copyBtn:hover {
-  background: #43a047;
+  resize: none;
 }
