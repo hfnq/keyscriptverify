@@ -1,48 +1,72 @@
+// Get REAL_KEY from URL hash
+function getKeyFromURL() {
+  if (location.hash.startsWith("#KEY=")) {
+    return location.hash.replace("#KEY=", "");
+  }
+  return null;
+}
+
+// Reverse helper
+function reverse(str) {
+  return str.split("").reverse().join("");
+}
+
+// Simple human challenge
+const challenges = [
+  "i am human",
+  "verify access",
+  "not a robot",
+  "human check"
+];
+
+const challenge =
+  challenges[Math.floor(Math.random() * challenges.length)];
+
+const status = document.getElementById("status");
+const loader = document.getElementById("loader");
 const humanCheck = document.getElementById("humanCheck");
-const verifyBtn = document.getElementById("verifyBtn");
-const mathQuestion = document.getElementById("mathQuestion");
-const mathAnswer = document.getElementById("mathAnswer");
-const result = document.getElementById("result");
+const challengeText = document.getElementById("challengeText");
+const challengeInput = document.getElementById("challengeInput");
+const verifyBtn = document.getElementById("verifyHuman");
 const keyBox = document.getElementById("keyBox");
 const copyBtn = document.getElementById("copyBtn");
 
-let a = Math.floor(Math.random() * 10) + 1;
-let b = Math.floor(Math.random() * 10) + 1;
-mathQuestion.textContent = `What is ${a} + ${b}?`;
-
-let allowVerify = false;
-
-// Delay to block instant bots
+// Fake load delay (anti-bot)
 setTimeout(() => {
-  allowVerify = true;
-}, 3000);
+  loader.style.display = "none";
+  status.textContent = "Human verification required";
+  challengeText.textContent = `Type exactly: "${challenge}"`;
+  humanCheck.classList.remove("hidden");
+}, 2000);
 
-humanCheck.addEventListener("change", () => {
-  verifyBtn.disabled = !humanCheck.checked;
-});
-
-verifyBtn.addEventListener("click", () => {
-  if (!allowVerify) {
-    alert("Please wait a moment before verifying.");
+// Verify human + generate FINAL KEY
+verifyBtn.onclick = () => {
+  if (challengeInput.value.trim() !== challenge) {
+    alert("Verification failed.");
     return;
   }
 
-  if (parseInt(mathAnswer.value) !== a + b) {
-    alert("Incorrect answer.");
+  const realKey = getKeyFromURL();
+  if (!realKey) {
+    status.textContent = "No verification key found.";
     return;
   }
 
-  // Generate + invert key
-  const rawKey = "KEY-" + Math.random().toString(36).substring(2, 14).toUpperCase();
-  const inverted = rawKey.split("").reverse().join("");
+  // 🔐 TRANSFORM KEY (MUST MATCH ROBLOX)
+  const finalKey = `VERIFY-${reverse(realKey)}-OK`;
 
-  keyBox.value = inverted;
-  result.classList.remove("hidden");
-});
+  humanCheck.classList.add("hidden");
+  status.textContent = "Verification complete";
 
-copyBtn.addEventListener("click", () => {
+  keyBox.value = finalKey;
+  keyBox.classList.remove("hidden");
+  copyBtn.classList.remove("hidden");
+};
+
+// Copy
+copyBtn.onclick = () => {
   keyBox.select();
-  document.execCommand("copy");
-  copyBtn.textContent = "Copied!";
-  setTimeout(() => copyBtn.textContent = "Copy Key", 1500);
-});
+  keyBox.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(keyBox.value);
+  alert("Key copied!");
+};
