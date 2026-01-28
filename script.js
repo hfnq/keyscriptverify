@@ -1,32 +1,28 @@
-function generateKey() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let key = "HFNQ-";
-  for (let i = 0; i < 32; i++) {
-    key += chars.charAt(Math.floor(Math.random() * chars.length));
+function getKeyFromURL() {
+  if (window.location.hash.startsWith("#KEY=")) {
+    return window.location.hash.replace("#KEY=", "");
   }
-  return key;
+  return null;
 }
-
-const params = new URLSearchParams(window.location.search);
-let key = params.get("key");
 
 setTimeout(() => {
   document.getElementById("loader").style.display = "none";
 
+  const key = getKeyFromURL();
+
   if (!key) {
-    key = generateKey();
-    window.location.search = "?key=" + key;
+    document.getElementById("status").innerText = "No verification key found.";
     return;
   }
 
   document.getElementById("status").innerText = "Verification complete";
   document.getElementById("keyBox").value = key;
-}, 1500);
+}, 1200);
 
 document.getElementById("copyBtn").onclick = () => {
-  const keyBox = document.getElementById("keyBox");
-  keyBox.select();
-  keyBox.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(keyBox.value);
+  const box = document.getElementById("keyBox");
+  box.select();
+  box.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(box.value);
   alert("Key copied!");
 };
