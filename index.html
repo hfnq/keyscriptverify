@@ -6,13 +6,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
+
+  <div class="container">
     <h1>Verification</h1>
-    <p id="status">Paste the link correctly to continue.</p>
-    <div id="keyBox" class="hidden">
-      <span>Your key:</span>
-      <code id="keyText"></code>
-    </div>
+
+    <div id="loader" class="loader"></div>
+    <p id="status">Verifying...</p>
+
+    <textarea id="keyBox" readonly></textarea>
+    <button id="copyBtn">Copy Key</button>
   </div>
 
   <script src="script.js"></script>
