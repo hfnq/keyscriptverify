@@ -5,19 +5,52 @@ function getKeyFromURL() {
   return null;
 }
 
+const challenges = [
+  "I am human",
+  "verify access",
+  "not a robot",
+  "type this text",
+  "human verification"
+];
+
+const challenge =
+  challenges[Math.floor(Math.random() * challenges.length)];
+
 setTimeout(() => {
   document.getElementById("loader").style.display = "none";
+  document.getElementById("status").innerText =
+    "Human verification required";
 
-  const key = getKeyFromURL();
+  document.getElementById("challengeText").innerText =
+    `Type exactly: "${challenge}"`;
 
-  if (!key) {
-    document.getElementById("status").innerText = "No verification key found.";
+  document.getElementById("humanCheck").style.display = "block";
+}, 2000);
+
+document.getElementById("verifyHuman").onclick = () => {
+  const input =
+    document.getElementById("challengeInput").value.trim();
+
+  if (input !== challenge) {
+    alert("Verification failed. Try again.");
     return;
   }
 
-  document.getElementById("status").innerText = "Verification complete";
+  const key = getKeyFromURL();
+  if (!key) {
+    document.getElementById("status").innerText =
+      "No verification key found.";
+    return;
+  }
+
+  document.getElementById("humanCheck").style.display = "none";
+  document.getElementById("status").innerText =
+    "Verification complete";
+
+  document.getElementById("keyBox").style.display = "block";
+  document.getElementById("copyBtn").style.display = "block";
   document.getElementById("keyBox").value = key;
-}, 1200);
+};
 
 document.getElementById("copyBtn").onclick = () => {
   const box = document.getElementById("keyBox");
