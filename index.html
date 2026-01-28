@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Verification</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="container">
     <h1>Verification</h1>
 
@@ -14,14 +15,15 @@
 
     <div id="humanCheck" class="hidden">
       <p id="challengeText"></p>
-      <input id="challengeInput" placeholder="Type the text above" />
+      <input id="challengeInput" placeholder="Type the text above">
       <button id="verifyHuman">Verify</button>
     </div>
 
-    <textarea id="keyBox" readonly class="hidden"></textarea>
+    <textarea id="keyBox" class="hidden" readonly></textarea>
     <button id="copyBtn" class="hidden">Copy Key</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- IMPORTANT: defer -->
+  <script src="script.js" defer></script>
 </body>
 </html>
