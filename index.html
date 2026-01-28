@@ -7,22 +7,38 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>Verification</h1>
+<div class="container">
+  <h1>Verification</h1>
 
-    <div id="loader" class="loader"></div>
-    <p id="status">Loading...</p>
+  <div id="loader" class="loader"></div>
+  <p id="status">Initializing...</p>
 
-    <div id="humanCheck" style="display:none;">
-      <p id="challengeText"></p>
-      <input id="challengeInput" placeholder="Type the text above">
-      <button id="verifyHuman">Verify</button>
-    </div>
-
-    <textarea id="keyBox" readonly style="display:none;"></textarea>
-    <button id="copyBtn" style="display:none;">Copy Key</button>
+  <!-- STEP 1 & 2 -->
+  <div id="stepTyping" class="step">
+    <p id="challengeText"></p>
+    <input id="challengeInput" placeholder="Type exactly">
+    <button id="typingBtn">Continue</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- STEP 3 -->
+  <div id="stepMouse" class="step">
+    <p>Click ALL of the following:</p>
+    <ul>
+      <li id="left">❌ Left Click</li>
+      <li id="right">❌ Right Click</li>
+      <li id="middle">❌ Middle Click</li>
+    </ul>
+  </div>
+
+  <!-- STEP 4 -->
+  <div id="stepKey" class="step">
+    <p>Press the <b>F12</b> key</p>
+  </div>
+
+  <textarea id="keyBox" readonly></textarea>
+  <button id="copyBtn">Copy Key</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
