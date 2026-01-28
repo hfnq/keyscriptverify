@@ -1,21 +1,32 @@
-const status = document.getElementById("status");
-const keyBox = document.getElementById("keyBox");
-const keyText = document.getElementById("keyText");
-
-// Read key from URL fragment
-// Example: https://site/#KEY=ABCD12
-const hash = window.location.hash;
-
-if (hash.startsWith("#KEY=")) {
-  const key = hash.replace("#KEY=", "").trim();
-
-  if (key.length > 0) {
-    status.textContent = "Verification successful.";
-    keyText.textContent = key;
-    keyBox.classList.remove("hidden");
-  } else {
-    status.textContent = "Invalid key.";
+function generateKey() {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let key = "HFNQ-";
+  for (let i = 0; i < 32; i++) {
+    key += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-} else {
-  status.textContent = "No verification key found.";
+  return key;
 }
+
+const params = new URLSearchParams(window.location.search);
+let key = params.get("key");
+
+setTimeout(() => {
+  document.getElementById("loader").style.display = "none";
+
+  if (!key) {
+    key = generateKey();
+    window.location.search = "?key=" + key;
+    return;
+  }
+
+  document.getElementById("status").innerText = "Verification complete";
+  document.getElementById("keyBox").value = key;
+}, 1500);
+
+document.getElementById("copyBtn").onclick = () => {
+  const keyBox = document.getElementById("keyBox");
+  keyBox.select();
+  keyBox.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(keyBox.value);
+  alert("Key copied!");
+};
