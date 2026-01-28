@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // Get REAL_KEY from URL
   function getKeyFromURL() {
     if (location.hash.startsWith("#KEY=")) {
       return location.hash.replace("#KEY=", "");
@@ -7,10 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
 
+  // Reverse helper
   function reverse(str) {
     return str.split("").reverse().join("");
   }
 
+  // Human challenges
   const challenges = [
     "i am human",
     "verify access",
@@ -21,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const challenge =
     challenges[Math.floor(Math.random() * challenges.length)];
 
+  // Elements
   const status = document.getElementById("status");
   const loader = document.getElementById("loader");
   const humanCheck = document.getElementById("humanCheck");
@@ -30,11 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const keyBox = document.getElementById("keyBox");
   const copyBtn = document.getElementById("copyBtn");
 
-  if (!verifyBtn) {
-    alert("JS failed to load properly. Hard refresh the page.");
-    return;
-  }
-
   // Fake loading delay
   setTimeout(() => {
     loader.style.display = "none";
@@ -43,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     humanCheck.classList.remove("hidden");
   }, 2000);
 
+  // Verify human
   verifyBtn.addEventListener("click", () => {
     if (challengeInput.value.trim() !== challenge) {
       alert("Verification failed.");
@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // 🔐 FINAL KEY (must match Roblox)
     const finalKey = `VERIFY-${reverse(realKey)}-OK`;
 
     humanCheck.classList.add("hidden");
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyBtn.classList.remove("hidden");
   });
 
+  // Copy key
   copyBtn.addEventListener("click", () => {
     keyBox.select();
     keyBox.setSelectionRange(0, 99999);
