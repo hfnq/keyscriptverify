@@ -1,6 +1,10 @@
-body {
-  background: #0d0d0d;
+* {
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0b0b0b;
   color: white;
   display: flex;
   justify-content: center;
@@ -9,45 +13,72 @@ body {
 }
 
 .container {
+  width: 360px;
   background: #151515;
-  padding: 25px;
-  border-radius: 10px;
-  width: 320px;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
 }
 
-.step {
-  margin-bottom: 15px;
+h1 {
+  margin-bottom: 10px;
 }
 
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  background: #222;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  word-break: break-all;
+#status {
+  color: #aaa;
+  margin-bottom: 10px;
 }
 
-button {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: #4a7cff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
+#loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  margin: 15px auto;
+  animation: spin 1s linear infinite;
 }
 
-button:disabled {
-  background: #555;
-  cursor: not-allowed;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .hidden {
   display: none;
+}
+
+#challengeText {
+  margin-bottom: 8px;
+  color: #ffa726;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  background: #0d0d0d;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 6px;
+  resize: none;
+  text-align: center;
+}
+
+textarea {
+  height: 60px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
 }
