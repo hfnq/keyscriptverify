@@ -1,7 +1,7 @@
 // Get REAL_KEY from URL hash
 function getKeyFromURL() {
   if (location.hash.startsWith("#KEY=")) {
-    return location.hash.replace("#KEY=random", "");
+    return location.hash.replace("#KEY=", "");
   }
   return null;
 }
