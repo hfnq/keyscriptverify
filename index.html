@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Verification</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="container">
+  <h1>Verification</h1>
 
-  <div class="container">
-    <h1>Verification</h1>
+  <div id="loader" class="loader"></div>
+  <p id="status">Checking...</p>
 
-    <div id="loader" class="loader"></div>
-    <p id="status">Verifying...</p>
-
-    <textarea id="keyBox" readonly></textarea>
-    <button id="copyBtn">Copy Key</button>
+  <div id="humanCheck" style="display:none;">
+    <p id="challengeText"></p>
+    <input id="challengeInput" placeholder="Type the text above" />
+    <button id="verifyHuman">Verify</button>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <textarea id="keyBox" readonly style="display:none;"></textarea>
+  <button id="copyBtn" style="display:none;">Copy Key</button>
+</div>
