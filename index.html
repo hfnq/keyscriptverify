@@ -1,15 +1,28 @@
-<div class="container">
-  <h1>Verification</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Verification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <div id="loader" class="loader"></div>
-  <p id="status">Checking...</p>
+  <div class="container">
+    <h1>Verification</h1>
 
-  <div id="humanCheck" style="display:none;">
-    <p id="challengeText"></p>
-    <input id="challengeInput" placeholder="Type the text above" />
-    <button id="verifyHuman">Verify</button>
+    <div id="loader" class="loader"></div>
+    <p id="status">Loading...</p>
+
+    <div id="humanCheck" style="display:none;">
+      <p id="challengeText"></p>
+      <input id="challengeInput" placeholder="Type the text above">
+      <button id="verifyHuman">Verify</button>
+    </div>
+
+    <textarea id="keyBox" readonly style="display:none;"></textarea>
+    <button id="copyBtn" style="display:none;">Copy Key</button>
   </div>
 
-  <textarea id="keyBox" readonly style="display:none;"></textarea>
-  <button id="copyBtn" style="display:none;">Copy Key</button>
-</div>
+  <script src="script.js"></script>
+</body>
+</html>
