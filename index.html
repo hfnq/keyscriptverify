@@ -1,44 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Verification</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>Verification</h1>
 
-<div class="container">
-  <h1>Verification</h1>
+    <div id="loader"></div>
+    <p id="status">Loading verification...</p>
 
-  <div id="loader" class="loader"></div>
-  <p id="status">Initializing...</p>
+    <div id="humanCheck" class="hidden">
+      <p id="challengeText"></p>
+      <input id="challengeInput" placeholder="Type the text above" />
+      <button id="verifyHuman">Verify</button>
+    </div>
 
-  <!-- STEP 1 & 2 -->
-  <div id="stepTyping" class="step">
-    <p id="challengeText"></p>
-    <input id="challengeInput" placeholder="Type exactly">
-    <button id="typingBtn">Continue</button>
+    <textarea id="keyBox" readonly class="hidden"></textarea>
+    <button id="copyBtn" class="hidden">Copy Key</button>
   </div>
 
-  <!-- STEP 3 -->
-  <div id="stepMouse" class="step">
-    <p>Click ALL of the following:</p>
-    <ul>
-      <li id="left">❌ Left Click</li>
-      <li id="right">❌ Right Click</li>
-      <li id="middle">❌ Middle Click</li>
-    </ul>
-  </div>
-
-  <!-- STEP 4 -->
-  <div id="stepKey" class="step">
-    <p>Press the <b>F12</b> key</p>
-  </div>
-
-  <textarea id="keyBox" readonly></textarea>
-  <button id="copyBtn">Copy Key</button>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
