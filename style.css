@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: #0f0f0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 320px;
+}
+
+code {
+  display: block;
+  margin-top: 10px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  background: #000;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
